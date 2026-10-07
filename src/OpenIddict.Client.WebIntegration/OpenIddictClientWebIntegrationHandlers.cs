@@ -1044,6 +1044,10 @@ public static partial class OpenIddictClientWebIntegrationHandlers
 
             context.DisableUserInfoValidation = context.Registration.ProviderType switch
             {
+                // The Discord provider uses a custom API endpoint instead of the standard OpenID
+                // Connect userinfo endpoint for compatibility with previous OpenIddict versions.
+                ProviderTypes.Discord => true,
+
                 // SuperOffice doesn't offer a standard OpenID Connect userinfo endpoint.
                 ProviderTypes.SuperOffice => true,
 
